@@ -1,0 +1,3 @@
+s1.build_product(uid: 'asdf', name: 'test product', category: 'clothes', sub_category: 'jeans', description: 'test jeans', gender: 'm', age_group: 'adult')
+
+s1.products.build(uid: 'asdf', name: 'test product', category: 'clothes', sub_category: 'jeans', description: 'test jeans', gender: 'm', age_group: 'adult')

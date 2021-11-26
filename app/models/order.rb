@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
 
-    belongs_to :users
-    belongs_to :stores
-    belongs_to :products
-
+    belongs_to :user
+    has_many :orders_products
+    has_many :products, through: :orders_products
+ 
 end

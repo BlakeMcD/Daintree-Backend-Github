@@ -6,6 +6,7 @@ class CreateAddresses < ActiveRecord::Migration[6.1]
       t.string :state
       t.string :postcode
       t.string :country
+      t.integer :user_id
 
       t.timestamps
     end

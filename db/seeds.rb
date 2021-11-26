@@ -1,7 +1,14 @@
-
 # users
 
 User.create(first_name: 'Blake', last_name: 'McDeezy', email: 'blake@mcdeezy.com', phone: '0412000000', store_admin: true, system_admin: true)
+User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::Number.number(10), store_admin: true, system_admin: true)
+
+#addresses
+
+u1 = User.find_by id:1
+
+address_1 = u1.build_address(street_address:'253 Franklin Street', city: 'Melbourne', state: 'VIC', postcode: 3000, country: 'Australia')
+address_1.save
 
 # stores
 
@@ -11,7 +18,23 @@ Store.create(name: 'Patagonia', description: 'Patagonia, one of the earliest def
 
 #products
 
-Product.create(uid: 'X2345', name: 'earthy blue jeans', category: 'clothes', sub_category: 'jeans', description: 'earthy', gender: 'm', age_group: 'adult')
+s01 = Store.find_by id:1
 
+s01p01 = s01.products.build(uid: 'asdf', name: 'test product', category: 'clothes', sub_category: 'jeans', description: 'test jeans', gender: 'm', age_group: 'adult')
+s01p01.save
 
+#images
+p1 = Product.find_by id: 1
+
+p1image01 = p1.images.build(colour: 'red', img_url: 'https://connor.imgix.net/Connor/Products/C18DE105_DEN_1.png')
+p1image01.save
+
+#stock
+p1stock01 = p1.stocks.build(colour: 'red', size: 's', stock: 24)
+p1stock01.save
+
+#orders
+
+o01 = u1.orders.build(order_number: 5, status: 'testing')
+o01.save
 

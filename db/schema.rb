@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_070424) do
+ActiveRecord::Schema.define(version: 2021_11_25_005356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_070424) do
     t.string "state"
     t.string "postcode"
     t.string "country"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_070424) do
   create_table "images", force: :cascade do |t|
     t.string "colour"
     t.string "img_url"
+    t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -35,11 +37,15 @@ ActiveRecord::Schema.define(version: 2021_11_22_070424) do
   create_table "orders", force: :cascade do |t|
     t.integer "order_number"
     t.integer "user_id"
-    t.integer "store_id"
-    t.integer "product_id"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders_products", id: false, force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["order_id", "product_id"], name: "index_orders_products_on_order_id_and_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -50,14 +56,16 @@ ActiveRecord::Schema.define(version: 2021_11_22_070424) do
     t.string "description"
     t.string "gender"
     t.string "age_group"
+    t.integer "store_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "stock", force: :cascade do |t|
+  create_table "stocks", force: :cascade do |t|
     t.string "colour"
     t.string "size"
     t.integer "stock"
+    t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
